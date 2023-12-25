@@ -1,32 +1,43 @@
-import InputForm from "./InputForm"
+import  { useContext } from "react";
+import InputForm from "./InputForm";
+import { ContextInputs } from "../contextInputs/ContextInputs";
 
-const InputsForms = () => {
-  const initialValue= {id:uuid,email,password}
-  const [inputs,setInputs] = useState(initialValue)
-  const EmailInput = (e)=>(
-       
-             
-  )
-    const inputDatas = [{
-      id:1,name:"Full Name",placeholder:"Enter Email" },{  id:2,name:"Email address",placeholder:"Enter Adress" },{  id:3,name:"Password",placeholder:"Password" },{  id:4,name:"Password Confirm",placeholder:"Confirm" },]
-        const   inputs = inputDatas.map(inputData=>(
-          <InputForm key= {inputData.id} id={inputData.id} name={inputData.name} placeholder={inputData.placeholder}/>
-            
-        )) 
-      return (
-    <div style = {{ display:"flex",alignItems:"center",justifyContent:"center"}}>
- <form>
-    <fieldset>
-    <legend>Register</legend>
-    <div className="form-group">
-      {inputs}
-       
+const InputsForms = () => { 
+
+  const { inputDatas ,handelSubmitInput} = useContext(ContextInputs);
+
+  const inputs =
+    inputDatas &&
+    inputDatas.map((inputData) => (
+      <InputForm
+        key={inputData.id}
+        id={inputData.id}
+        name={inputData.name}
+        placeholder={inputData.placeholder}
+        ref={inputData.ref}
+        onChange={inputData.onChange} 
+        message={inputData.message} 
+      />
+    ));
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <form onSubmit ={handelSubmitInput}>
+        <fieldset>
+          <legend>Register</legend>
+          <div className="form-group">{inputs}</div>
+          <button type="submit" className="btn btn-info my-4  ">Submit</button>
+
+        </fieldset>
+      </form>
     </div>
-    </fieldset>  
- </form>
- </div>
- 
-  )
-}
+  );
+};
 
-export default InputsForms
+export default InputsForms;

@@ -1,11 +1,13 @@
-import InputsForms from "./compontens/InputsForms"
+import InputsForms from "./compontens/InputsForms";
+import ContextProvider from "./contextInputs/ContextInputs";
 function App() {
-
   return (
     <div>
-     <InputsForms/>
+      <ContextProvider>
+        <InputsForms />
+      </ContextProvider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
